@@ -16,11 +16,11 @@ public abstract class GenericServiceImpl<T extends BaseEntity> implements Generi
     
 	private GenericDAO<T> dao;
 
-	public GenericDAO<T> getRepository() {
+	public GenericDAO<T> getDAO() {
 		return dao;
 	}
-	public void setRepository(GenericDAO<T> repository) {
-		this.dao = repository;
+	public void setDAO(GenericDAO<T> dao) {
+		this.dao = dao;
 	}
 	@Transactional(readOnly = true)
 	public List<T> findByCriteria(Map<String, Object> criterias, Filter filter, boolean strict,

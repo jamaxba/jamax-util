@@ -20,6 +20,6 @@ public interface GenericService<T extends BaseEntity> {
     Collection<T> addAll(Collection<T> tList);
 	void delete(T t);
 	void update(T t);
-	void setRepository(GenericDAO<T> repository);
-	GenericDAO<T> getRepository();
+	void setDAO(GenericDAO<T> dao);
+	GenericDAO<T> getDAO();
 }
