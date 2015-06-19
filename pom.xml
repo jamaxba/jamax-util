@@ -34,6 +34,13 @@
 		<failsafe.maven.plugin.version>2.18.1</failsafe.maven.plugin.version>
 		<surefire.maven.plugin.version>2.18.1</surefire.maven.plugin.version>
 	</properties>
+	
+	<licenses>
+	  <license>
+	    <name>The Apache License, Version 2.0</name>
+	    <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+	  </license>
+	</licenses>
 
 	<organization>
 		<name>Jamax Software</name>
@@ -51,8 +58,8 @@
 	</developers>
 	
 	<scm>
-		<connection>https://github.com/jamaxba/jamax-util.git</connection>
-		<developerConnection>https://github.com/jamaxba/jamax-util.git</developerConnection>
+		<connection>scm:git:git@github.com:jamaxba/jamax-util.git</connection>
+		<developerConnection>scm:git:git@github.com:jamaxba/jamax-util.git</developerConnection>
 		<tag>HEAD</tag>
 		<url>https://github.com/jamaxba/jamax-util</url>
 	</scm>
@@ -66,7 +73,6 @@
 		<system>Jenkins</system>
 		<url>http://www.jamax.ba/jenkins/job/jamax-rest/</url>
 	</ciManagement>
-
 
 	<build>
 		<plugins>
@@ -118,20 +124,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<distributionManagement>
-		<repository>
-			<id>jamax-release-local</id>
-			<name>Jamax Library Release Internal Repository</name>
-			<url>http://www.jamax.ba/artifactory/libs-release-local</url>
-		</repository>
-		<snapshotRepository>
-			<id>jamax-snapshot-local</id>
-			<name>Jamax Library Snapshot Internal Repository</name>
-			<url>http://www.jamax.ba/artifactory/libs-snapshot-local</url>
-		</snapshotRepository>
-	</distributionManagement>
-	
-	<repositories>
-	</repositories>
 </project>
