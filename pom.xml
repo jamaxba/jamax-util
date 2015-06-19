@@ -21,6 +21,9 @@
 		<spring.framework.version>4.1.6.RELEASE</spring.framework.version>
 		<spring.security.version>4.0.0.RELEASE</spring.security.version> 
 		<hibernate.framework.version>4.3.8.Final</hibernate.framework.version>
+		<jsp.version>7.0.59</jsp.version>
+		<jstl.version>1.2</jstl.version>
+		<tomcat.servlet.api>7.0.59</tomcat.servlet.api>
 		<junit.version>4.12</junit.version>
 		<mockito.version>1.10.19</mockito.version>
 		<logback.version>1.1.2</logback.version>
