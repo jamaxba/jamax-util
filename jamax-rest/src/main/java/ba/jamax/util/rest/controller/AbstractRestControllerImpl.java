@@ -177,20 +177,21 @@ public abstract class AbstractRestControllerImpl<T extends BaseEntity> implement
 	protected Serializable getCorrectObjectType(String key, Serializable value) {
 		try {
 			Method method = getGetterMethod(key);
-			if (method.getReturnType().equals(value.getClass())) {
+			Class<?> returnType = method.getReturnType();
+			if (returnType.equals(value.getClass())) {
 				return value;
-			} else if (Integer.class.equals(method.getReturnType())) {
+			} else if (Integer.class.equals(returnType)) {
 				return Integer.valueOf((String) value);
-			} else if (Long.class.equals(method.getReturnType())) {
+			} else if (Long.class.equals(returnType)) {
 				return Long.valueOf((String) value);
-			} else if (Float.class.equals(method.getReturnType())) {
+			} else if (Float.class.equals(returnType)) {
 				return Float.valueOf((String) value);
-			} else if (Double.class.equals(method.getReturnType())) {
+			} else if (Double.class.equals(returnType)) {
 				return Double.valueOf((String) value);
-			} else if (Boolean.class.equals(method.getReturnType())) {
+			} else if (Boolean.class.equals(returnType)) {
 				return Boolean.valueOf((String) value);
-			} else if (method.getReturnType().isEnum()) {
-				return (String) method.getReturnType().getDeclaredMethod("valueOf", String.class).invoke(null, (String) value);
+			} else if (returnType.isEnum()) {
+				return (Serializable) returnType.getDeclaredMethod("valueOf", String.class).invoke(null, (String) value);
 			}
 		} catch (Exception e) {
 			// skip method - out of the scope
