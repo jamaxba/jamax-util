@@ -25,6 +25,7 @@ import org.springframework.web.servlet.LocaleResolver;
 import ba.jamax.util.rest.model.BaseEntity;
 import ba.jamax.util.rest.service.GenericService;
 import ba.jamax.util.rest.util.GenericUtils;
+import ba.jamax.util.rest.util.TypeUtils;
 
 public abstract class AbstractRestControllerImpl<T extends BaseEntity> implements AbstractRestController<T> {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractRestControllerImpl.class);
@@ -33,9 +34,11 @@ public abstract class AbstractRestControllerImpl<T extends BaseEntity> implement
 	private ApplicationContext context;
 	@Autowired
 	private LocaleResolver localeResolver;
+	@Autowired
+	private TypeUtils typeUtils = new TypeUtils();
 
 	private GenericService<T> service;
-	private GenericUtils<T> utils = new GenericUtils<T>();
+	private GenericUtils<T> genericUtils = new GenericUtils<T>();
 	protected abstract Class<T> getPersistentClass();
 
 	public GenericService<T> getService() {
@@ -104,7 +107,7 @@ public abstract class AbstractRestControllerImpl<T extends BaseEntity> implement
         LOGGER.debug("entityId[{}]", new Object[]{entityId});
 		Map<String, Object> responseMap = new HashMap<String, Object>();
 		try {
-			T t = getService().findById(getCorrectObjectType("id",entityId));
+			T t = getService().findById(typeUtils.getCorrectObjectType(getGetterMethod("id"),entityId));
 			if (t != null) {
 				getService().delete(t);
 			}
@@ -168,38 +171,14 @@ public abstract class AbstractRestControllerImpl<T extends BaseEntity> implement
 			Map<String, Object> criteriaMap = new HashMap<String, Object>();
 			for (String key : gridViewModel.getCriteria().keySet()) {
 				Object value = gridViewModel.getCriteria().get(key);
-				value = getCorrectObjectType(key, (Serializable) value);
+				value = typeUtils.getCorrectObjectType(getGetterMethod(key), (Serializable) value);
 				criteriaMap.put(key, value);
 			}
 			gridViewModel.setCriteria(criteriaMap);
 		}
 	}
-	protected Serializable getCorrectObjectType(String key, Serializable value) {
-		try {
-			Method method = getGetterMethod(key);
-			Class<?> returnType = method.getReturnType();
-			if (returnType.equals(value.getClass())) {
-				return value;
-			} else if (Integer.class.equals(returnType)) {
-				return Integer.valueOf((String) value);
-			} else if (Long.class.equals(returnType)) {
-				return Long.valueOf((String) value);
-			} else if (Float.class.equals(returnType)) {
-				return Float.valueOf((String) value);
-			} else if (Double.class.equals(returnType)) {
-				return Double.valueOf((String) value);
-			} else if (Boolean.class.equals(returnType)) {
-				return Boolean.valueOf((String) value);
-			} else if (returnType.isEnum()) {
-				return (Serializable) returnType.getDeclaredMethod("valueOf", String.class).invoke(null, (String) value);
-			}
-		} catch (Exception e) {
-			// skip method - out of the scope
-		}
-		return value;
-	}
 	protected Method getGetterMethod(String key) {
-		Method m = this.utils.getGetter(getPersistentClass(), key);
+		Method m = this.genericUtils.getGetter(getPersistentClass(), key);
 		if(key != null && key.contains(".")) {
 			// we have relation: entity.someOtherEntity.moreEntity.id
 			String[] entities = key.split("\\.");
@@ -211,7 +190,7 @@ public abstract class AbstractRestControllerImpl<T extends BaseEntity> implement
 	}
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	protected Method getChainedGetterMethod(Class type, String[] entities, int counter) {
-		Method method = this.utils.getGetter(type, entities[counter]);
+		Method method = this.genericUtils.getGetter(type, entities[counter]);
 		counter++;
 		if(counter >= entities.length) {
 			return method;

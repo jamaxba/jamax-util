@@ -29,6 +29,7 @@ import ba.jamax.util.rest.model.FilterRule;
 import ba.jamax.util.rest.model.Rule;
 import ba.jamax.util.rest.service.GenericServiceImpl;
 import ba.jamax.util.rest.util.GenericUtils;
+import ba.jamax.util.rest.util.TypeUtils;
 
 public abstract class GenericDAOImpl<T extends BaseEntity> implements GenericDAO<T> {
 	
@@ -38,6 +39,8 @@ public abstract class GenericDAOImpl<T extends BaseEntity> implements GenericDAO
     
     @Autowired
     private SessionFactory sessionFactory;
+	@Autowired
+	private TypeUtils typeUtils = new TypeUtils();
 
 	private Class<T> entityClass;
 	private GenericUtils<T> utils = new GenericUtils<T>();
@@ -157,19 +160,6 @@ public abstract class GenericDAOImpl<T extends BaseEntity> implements GenericDAO
 			}
 		}		
 	}
-	private Object getDataObject(Method m, String data) {
-
-		if (m.getReturnType().equals(data.getClass())) {
-			return (String)data;
-		} else if (Integer.class.equals(m.getReturnType())) {
-			return Integer.valueOf(data);
-		} else if (Long.class.equals(m.getReturnType())) {
-			return Long.valueOf(data);
-		} else if (Boolean.class.equals(m.getReturnType())) {
-			return Boolean.valueOf(data);
-		}
-		return null;
-	}
 	private Criteria createCriteria(final Map<String, Object> criterias, 
 			final Filter filter, final boolean strict,
 			final Criteria criteria, final Order order) {
@@ -212,7 +202,7 @@ public abstract class GenericDAOImpl<T extends BaseEntity> implements GenericDAO
 						data = rule.getData();
 						field = rule.getField();
 						Method m = this.utils.getGetter(this.entityClass, field);
-						dataObj = getDataObject(m, data);						
+						dataObj = typeUtils.getCorrectObjectType(m, data);						
 						if(criterion == null) {
 							criterion = decodeOp(rule.getOp(),field,dataObj);
 						} else if(groupOp.equals("AND")) {
