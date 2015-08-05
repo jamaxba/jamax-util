@@ -34,11 +34,10 @@ public abstract class AbstractRestControllerImpl<T extends BaseEntity> implement
 	private ApplicationContext context;
 	@Autowired
 	private LocaleResolver localeResolver;
-	@Autowired
-	private TypeUtils typeUtils = new TypeUtils();
 
 	private GenericService<T> service;
 	private GenericUtils<T> genericUtils = new GenericUtils<T>();
+	private TypeUtils typeUtils = new TypeUtils();
 	protected abstract Class<T> getPersistentClass();
 
 	public GenericService<T> getService() {

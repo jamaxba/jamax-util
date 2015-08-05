@@ -39,11 +39,10 @@ public abstract class GenericDAOImpl<T extends BaseEntity> implements GenericDAO
     
     @Autowired
     private SessionFactory sessionFactory;
-	@Autowired
-	private TypeUtils typeUtils = new TypeUtils();
 
 	private Class<T> entityClass;
 	private GenericUtils<T> utils = new GenericUtils<T>();
+	private TypeUtils typeUtils = new TypeUtils();
 
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
