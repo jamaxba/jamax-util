@@ -96,18 +96,29 @@ public abstract class GenericDAOImpl<T extends BaseEntity> implements GenericDAO
 			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 			criteria.setFirstResult(firstResult);
 			criteria.setMaxResults(maxResults);
-			criteria = createCriteria(criterias, filter, strict, criteria, order);
+			createCriteria(criterias, filter, strict, criteria, order);
 
 			return criteria.list();
 	}
-    public int countByCriteria(final Map<String, Object> criteriaMap, 
+    @SuppressWarnings("unchecked")
+	public int countByCriteria(final Map<String, Object> criteriaMap, 
     		final Filter filter, final boolean strict) {
         Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(entityClass);
         createCriteria(criteriaMap, filter, strict, criteria, null);
         criteria.setProjection(Projections.rowCount());
-        return criteria.list().size() > 0 ? ((Number) criteria.list().get(0)).intValue() : 0;
+        List<Number> counts = criteria.list();
+        return getSumOfCounts(counts);
     }
-
+	private int getSumOfCounts(final List<Number> counts) {
+		int totalCounts = 0;
+		if(counts != null && counts.size() > 0) {
+			for(Number count : counts) {
+				totalCounts += count.intValue();
+			}
+		}
+		return totalCounts;
+	}
+		
 	private void addAliasesToCriteria(final String key, final Criteria criteria) {
 		if (key != null && key.contains(".")) {
 			if (key.contains(",")) {
@@ -159,7 +170,7 @@ public abstract class GenericDAOImpl<T extends BaseEntity> implements GenericDAO
 			}
 		}		
 	}
-	private Criteria createCriteria(final Map<String, Object> criterias, 
+	private void createCriteria(final Map<String, Object> criterias, 
 			final Filter filter, final boolean strict,
 			final Criteria criteria, final Order order) {
 		aliasMap.clear();
@@ -178,8 +189,6 @@ public abstract class GenericDAOImpl<T extends BaseEntity> implements GenericDAO
 				criteria.addOrder(order);
 			}
 		}
-        
-		return criteria;
 	}
 	private void addFiltersToCriteria(final Filter filter, final Criteria criteria) {
 		// "filter": "{"groupOp":"AND","rules":[

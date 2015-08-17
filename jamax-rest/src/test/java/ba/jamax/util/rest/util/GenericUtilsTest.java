@@ -39,5 +39,4 @@ public class GenericUtilsTest {
 		String methodName = getGroupOp.getName();
 		Assert.assertTrue(methodName.equals("getTitle"));
 	}
-
 }

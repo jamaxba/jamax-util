@@ -18,9 +18,11 @@ import org.mockito.Mockito;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import ba.jamax.util.rest.dao.GenericDAO;
+import ba.jamax.util.rest.dao.TestDAO;
 import ba.jamax.util.rest.model.Filter;
 import ba.jamax.util.rest.model.TestEntity;
 import ba.jamax.util.rest.service.GenericService;
+import ba.jamax.util.rest.service.TestService;
 
 public class GenericServiceTest {
 
