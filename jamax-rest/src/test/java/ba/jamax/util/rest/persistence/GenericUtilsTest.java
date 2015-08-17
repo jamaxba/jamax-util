@@ -1,4 +1,4 @@
-package ba.jamax.util.rest.util;
+package ba.jamax.util.rest.persistence;
 
 import java.lang.reflect.Method;
 
