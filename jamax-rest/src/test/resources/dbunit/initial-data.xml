@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+    <SubTestEntity1
+    	id="500001"
+    	description="Test DESC" 
+    	name="SubTestEntity1 1" 
+    	prop1="prop1 1"/>
+    <SubTestEntity1
+    	id="500002"
+    	description="Test DESC" 
+    	name="SubTestEntity1 2" 
+    	prop1="prop1 2"/>
+    	
+    <SubTestEntity2
+    	id="600001"
+    	description="Test DESC" 
+    	name="SubTestEntity2 1" 
+    	prop2="prop2 1"/>
+    <SubTestEntity2
+    	id="600002"
+    	description="Test DESC" 
+    	name="SubTestEntity2 2" 
+    	prop2="prop2 2"/>
+    <SubTestEntity2
+    	id="600003"
+    	description="Test DESC" 
+    	name="SubTestEntity2 3" 
+    	prop2="prop2 3"/>
+</dataset>
