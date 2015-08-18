@@ -1,10 +1,8 @@
 package ba.jamax.util.test.integration;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.hibernate.criterion.Order;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -24,9 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 
-import ba.jamax.util.rest.model.BaseTestEntity;
-import ba.jamax.util.rest.model.Filter;
-import ba.jamax.util.rest.service.BaseTestEntityService;
+import ba.jamax.util.rest.dao.BaseTestEntityDAO;
 import ba.jamax.util.test.config.TestWebConfig;
 import ba.jamax.util.test.config.WebContextLoader;
 
@@ -47,7 +43,7 @@ import ba.jamax.util.test.config.WebContextLoader;
 @DatabaseSetup("classpath:dbunit/initial-data.xml")
 public class BaseDAOIT extends AbstractTransactionalJUnit4SpringContextTests {
 	@Autowired
-	BaseTestEntityService baseTestEntityService;
+	BaseTestEntityDAO baseTestEntityDAO;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -65,10 +61,8 @@ public class BaseDAOIT extends AbstractTransactionalJUnit4SpringContextTests {
 	@Test
 	public void testCountByCriteria() {
 		Map<String, Object> criterias = new HashMap<String, Object>();
-//		Filter filter = new Filter();
-//		filter.setGroupOp("test2");
-//		List<BaseTestEntity> results = this.baseTestEntityDAOImpl.findByCriteria(criterias, filter, true, 0, Integer.MAX_VALUE, Order.asc("groupOp"));
-//		Assert.assertNotNull(results);
-//		Assert.assertEquals(0, results.size());
+		Integer count = this.baseTestEntityDAO.countByCriteria(criterias, null, true);
+		Assert.assertNotNull(count);
+		Assert.assertEquals(5, count.intValue());
 	}
 }
