@@ -17,7 +17,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import ba.jamax.util.rest.dao.BaseTestEntityDAO;
+import ba.jamax.util.rest.dao.BaseTestEntityDAOImpl;
 import ba.jamax.util.rest.model.BaseTestEntity;
 import ba.jamax.util.rest.model.Filter;
 import ba.jamax.util.test.config.TestWebConfig;
@@ -31,7 +31,7 @@ import ba.jamax.util.test.config.WebContextLoader;
 		})
 public class BaseDAOTest extends AbstractTransactionalJUnit4SpringContextTests {
 	@Autowired
-	BaseTestEntityDAO baseTestEntityDAO;
+	BaseTestEntityDAOImpl baseTestEntityDAOImpl;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -54,7 +54,7 @@ public class BaseDAOTest extends AbstractTransactionalJUnit4SpringContextTests {
 		Map<String, Object> criterias = new HashMap<String, Object>();
 		Filter filter = new Filter();
 		filter.setGroupOp("test2");
-		List<BaseTestEntity> results = this.baseTestEntityDAO.findByCriteria(criterias, filter, true, 0, Integer.MAX_VALUE, Order.asc("groupOp"));
+		List<BaseTestEntity> results = this.baseTestEntityDAOImpl.findByCriteria(criterias, filter, true, 0, Integer.MAX_VALUE, Order.asc("groupOp"));
 		Assert.assertNotNull(results);
 		Assert.assertEquals(0, results.size());
 	}
