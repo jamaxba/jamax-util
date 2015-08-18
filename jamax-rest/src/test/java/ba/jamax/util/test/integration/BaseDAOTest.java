@@ -1,4 +1,4 @@
-package ba.jamax.util.rest.persistence;
+package ba.jamax.util.test.integration;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,15 +13,23 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import ba.jamax.util.rest.dao.BaseTestEntityDAO;
 import ba.jamax.util.rest.model.BaseTestEntity;
 import ba.jamax.util.rest.model.Filter;
+import ba.jamax.util.test.config.TestWebConfig;
+import ba.jamax.util.test.config.WebContextLoader;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-public class BaseDAOTest extends AbstractJUnit4SpringContextTests {
+@ContextConfiguration(
+		loader=WebContextLoader.class,
+		classes={
+			TestWebConfig.class,
+		})
+public class BaseDAOTest extends AbstractTransactionalJUnit4SpringContextTests {
 	@Autowired
 	BaseTestEntityDAO baseTestEntityDAO;
 

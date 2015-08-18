@@ -1,4 +1,4 @@
-package ba.jamax.util.rest.persistence;
+package ba.jamax.util.test.unit;
 
 import java.util.HashMap;
 import java.util.List;

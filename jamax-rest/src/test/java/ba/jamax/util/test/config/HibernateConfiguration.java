@@ -1,4 +1,4 @@
-package ba.jamax.util.config;
+package ba.jamax.util.test.config;
 
 import java.beans.PropertyVetoException;
 import java.sql.SQLException;

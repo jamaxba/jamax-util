@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ba.jamax.util.rest.model.BaseTestEntity;
-import ba.jamax.util.rest.service.BaseTestEntityService;
+import ba.jamax.util.rest.service.BaseTestEntityServiceImpl;
 
 @Controller
 @RequestMapping("/baseTestEntity")
@@ -17,12 +17,12 @@ public class BaseTestEntityGridController extends AbstractRestControllerImpl<Bas
 		return BaseTestEntity.class;
 	}
     @Override
-	public BaseTestEntityService getService() {
-        return (BaseTestEntityService) super.getService();
+	public BaseTestEntityServiceImpl getService() {
+        return (BaseTestEntityServiceImpl) super.getService();
     }
     
     @Autowired
-    public void setNetworkConfigService(final BaseTestEntityService BaseTestEntityService) {
-        super.setService(BaseTestEntityService);
+    public void setNetworkConfigService(final BaseTestEntityServiceImpl BaseTestEntityServiceImpl) {
+        super.setService(BaseTestEntityServiceImpl);
     }        
 }
