@@ -170,7 +170,7 @@ public abstract class GenericDAOImpl<T extends BaseEntity> implements GenericDAO
 			}
 		}		
 	}
-	private void createCriteria(final Map<String, Object> criterias, 
+	protected void createCriteria(final Map<String, Object> criterias, 
 			final Filter filter, final boolean strict,
 			final Criteria criteria, final Order order) {
 		aliasMap.clear();
@@ -243,11 +243,22 @@ public abstract class GenericDAOImpl<T extends BaseEntity> implements GenericDAO
 	}	
 	/**
 	 * All available option are: 
-	 * ['eq','ne','lt','le','gt','ge','bw','bn','in','ni','ew','en','cn','nc','nu','nn'] 
-	 * The corresponding texts are in language file and mean the following: 
-	 * ['equal','not equal', 'less', 'less or equal','greater','greater or equal', 
-	 * 'begins with','does not begin with','is in','is not in','ends with',
-	 * 'does not end with','contains','does not contain','is null','not null'] 
+	 * 'eq' => 'equal'
+	 * 'ne' => 'not equal'
+	 * 'lt' => 'less'
+	 * 'le' => 'less or equal'
+	 * 'gt' => 'greater'
+	 * 'ge' => 'greater or equal'
+	 * 'bw' => 'begins with'
+	 * 'bn' => 'does not begin with'
+	 * 'in' => 'is in'
+	 * 'ni' => 'is not in'
+	 * 'ew' => 'ends with'
+	 * 'en' => 'does not end with'
+	 * 'cn' => 'contains'
+	 * 'nc' => 'does not contain'
+	 * 'nu' => 'is null'
+	 * 'nn' => 'not null'
 	 * Note that the elements in sopt array can be mixed in any order.
 	 * @param op
 	 * @return
