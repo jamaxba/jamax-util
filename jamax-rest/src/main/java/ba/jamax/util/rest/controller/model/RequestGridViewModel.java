@@ -1,4 +1,4 @@
-package ba.jamax.util.rest.controller;
+package ba.jamax.util.rest.controller.model;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -18,7 +18,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@JsonIgnoreProperties({"nd", "$edit", "$newRow"})
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class RequestGridViewModel implements Serializable {	
 	private static Logger logger = LoggerFactory.getLogger(RequestGridViewModel.class);
 	private static final long serialVersionUID = 5679777077467867776L;

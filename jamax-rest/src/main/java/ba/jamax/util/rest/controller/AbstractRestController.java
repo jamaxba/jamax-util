@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import ba.jamax.util.rest.controller.model.RequestGridViewModel;
+import ba.jamax.util.rest.controller.model.ResponseGridViewModel;
 import ba.jamax.util.rest.model.BaseEntity;
 
 public interface AbstractRestController<T extends BaseEntity> {

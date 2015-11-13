@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.LocaleResolver;
 
+import ba.jamax.util.rest.controller.model.RequestGridViewModel;
+import ba.jamax.util.rest.controller.model.ResponseGridViewModel;
 import ba.jamax.util.rest.model.BaseEntity;
 import ba.jamax.util.rest.service.GenericService;
 import ba.jamax.util.rest.util.GenericUtils;

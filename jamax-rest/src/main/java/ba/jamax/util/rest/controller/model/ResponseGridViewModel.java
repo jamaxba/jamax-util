@@ -1,4 +1,4 @@
-package ba.jamax.util.rest.controller;
+package ba.jamax.util.rest.controller.model;
 
 import java.io.Serializable;
 import java.util.List;
