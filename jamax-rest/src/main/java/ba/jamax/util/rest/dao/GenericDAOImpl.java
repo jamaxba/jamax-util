@@ -67,6 +67,8 @@ public abstract class GenericDAOImpl<T extends BaseEntity> implements GenericDAO
 	public T addNew(T t) {
 		t.setCreated(new Date());
 		t.setCreatedBy(getUsernameInSession());
+		t.setModified(new Date());
+		t.setModifiedBy(getUsernameInSession());
 		getSessionFactory().getCurrentSession().saveOrUpdate(t);
 		return t;
 	}
