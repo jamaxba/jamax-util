@@ -1,2 +1,2 @@
 # jamax-util
-Jamax Utils
+Jamax Utils tools for jamax projects
